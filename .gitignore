@@ -1,0 +1,15 @@
+# Log ve Test Verileri
+*.log
+tests/sample_auth.log
+
+# Veritabanı ve Durum Dosyalari
+data/*.db
+data/*.sqlite
+*.tmp
+*.temp
+
+# İşletim Sistemi ve Editör Kalıntıları
+.DS_Store
+*~
+*.swp
+.vscode/

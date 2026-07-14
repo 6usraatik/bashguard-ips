@@ -1,0 +1,18 @@
+[Unit]
+Description=BashGuard-IPS: Autonomous Log Analyzer and Firewall Blocker
+After=network.target rsyslog.service
+
+[Service]
+Type=simple
+# Programın çalışacağı çalışma dizini (/opt altında konumlandıracağız)
+WorkingDirectory=/opt/bashguard-ips
+ExecStart=/opt/bashguard-ips/bashguard.sh
+# Servis çökse bile 3 saniye içinde Linux tarafından otomatik yeniden başlatılsın
+Restart=always
+RestartSec=3
+# Firewall kuralları yazabilmek için root haklarıyla çalışmalı
+User=root
+
+[Install]
+# Çok kullanıcılı sistem seviyesinde (başlangıçta) aktif ol
+WantedBy=multi-user.target
