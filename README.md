@@ -119,7 +119,8 @@ DRY_RUN="false"
 ````
 
 ## 🧹 Sistemden Kaldırma (Uninstallation)
-````
+
 Sistemi iz bırakmadan ve firewall kurallarını orijinal haline döndürerek temizlemek için:
 ````
-## sudo ./uninstall.sh
+sudo ./uninstall.sh
+````
