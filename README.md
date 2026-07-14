@@ -75,7 +75,7 @@ sudo journalctl -u bashguard -f
 ## 📊 CLI Özet Panosu (Dashboard)
 Aracın arka planda ne yaptığını tek bakışta görmek için özel durum panosunu çalıştırabilirsiniz:
 ````
-## sudo /opt/bashguard-ips/status.sh
+sudo /opt/bashguard-ips/status.sh
 ````
 Örnek Ekran Çıktısı:
 
