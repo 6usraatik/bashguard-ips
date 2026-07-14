@@ -32,8 +32,10 @@ Analiz Motoru (state.sh): Process Substitution < <(...) mimarisi sayesinde alt k
 İnfaz Motoru (firewall.sh): Sistemin mevcut kurallarını bozmamak için kendisine özel BASHGUARD_IPS adında izole bir zincir kurar. Saldırganın IP'sini listenin en tepesine (-I) çakarak trafiği anında imha (DROP) eder.
 
 Af Motoru / Reaper (reaper.sh): Arka planda (&) çalışan asenkron bir temizlikçidir. Unix Epoch zamanını (date +%s) denetleyerek engelleme süresi dolan IP'leri ağdan otomatik temizler.
+```
 
-✨ Öne Çıkan Mühendislik Özellikleri
+## ✨ Öne Çıkan Mühendislik Özellikleri
+```text
 🛡️ Defensive Scripting (set -euo pipefail): Tanımsız değişken kullanımını ve boru hattı (pipeline) kırılmalarını anında yakalar; olası sistem arızalarının veya veri kayıplarının önüne geçer.
 
 ⚡ Sıfır Bağımlılık (Zero-Dependency): Python veya harici kütüphaneler gerektirmez. Doğrudan Linux çekirdeği ve yerleşik metin işleme araçlarıyla (grep, awk, sed, sort, uniq) maksimum hızda çalışır.
@@ -45,32 +47,32 @@ Af Motoru / Reaper (reaper.sh): Arka planda (&) çalışan asenkron bir temizlik
 💀 Graceful Shutdown (trap): CTRL+C veya servis durdurma sinyali (SIGINT/SIGTERM) geldiğinde arka plandaki alt süreçleri (Reaper) öldürerek sistemde "yetim süreç" (zombie process) bırakmaz.
 
 🔄 Systemd Entegrasyonu (Restart=always): Sunucu yeniden başlasa veya çökse dahi Linux çekirdeği tarafından 3 saniye içinde yeniden diriltilen 7/24 aktif bir daemon'dır.
+```
 
-🚀 Kurulum ve Kullanım
+## 🚀 Kurulum ve Kullanım
 1. Depoyu Kopyalayın
-Bash
-git clone [https://github.com/6usraatik/bashguard-ips.git](https://github.com/6usraatik/bashguard-ips.git)
-cd bashguard-ips
+## git clone [https://github.com/6usraatik/bashguard-ips.git](https://github.com/6usraatik/bashguard-ips.git)
+## cd bashguard-ips
 2. Tek Komutla Sistem Servisi Olarak Kurun
 Kurulum betiği, dosyaları sistemin /opt/bashguard-ips dizinine taşır, izinleri ayarlar ve systemd servisini aktifleştirir:
 
-Bash
-sudo ./install.sh
+## sudo ./install.sh
 3. Servis Durumunu ve Canlı Logları İzleyin
-Bash
-# Servisin aktiflik durumunu kontrol edin
-sudo systemctl status bashguard
 
-# Arka planda gerçekleşen anlık engellemeleri canlı izleyin
-sudo journalctl -u bashguard -f
-📊 CLI Özet Panosu (Dashboard)
+# [Servisin aktiflik durumunu kontrol edin]
+## sudo systemctl status bashguard
+
+# [Arka planda gerçekleşen anlık engellemeleri canlı izleyin]
+## sudo journalctl -u bashguard -f
+
+
+## 📊 CLI Özet Panosu (Dashboard)
 Aracın arka planda ne yaptığını tek bakışta görmek için özel durum panosunu çalıştırabilirsiniz:
 
-Bash
-sudo /opt/bashguard-ips/status.sh
+## sudo /opt/bashguard-ips/status.sh
 Örnek Ekran Çıktısı:
 
-Plaintext
+````
 ====================================================
          BASHGUARD-IPS CANLI DURUM PANOSU           
 ====================================================
@@ -84,23 +86,27 @@ ENGELLEME TARİHİ	BİTİŞ SÜRESİ	IP ADRESİ
 2026-07-14 11:40:00	~45 dk kaldı	198.51.100.22
 2026-07-14 11:42:15	~58 dk kaldı	203.0.113.45
 ====================================================
-⚙️ Yapılandırma (bashguard.conf)
+````
+
+
+## ⚙️ Yapılandırma (bashguard.conf)
 Aracın davranışlarını /opt/bashguard-ips/conf/bashguard.conf dosyası üzerinden anlık olarak özelleştirebilirsiniz:
 
-Bash
-# İzlenecek hedef log dosyası (Örn: SSH veya Web Sunucusu)
-LOG_FILE="/var/log/auth.log"
+# [İzlenecek hedef log dosyası (Örn: SSH veya Web Sunucusu)]
+## LOG_FILE="/var/log/auth.log"
 
-# Bir IP'nin engellenmesi için gereken maksimum ihlal sayısı
-MAX_ATTEMPTS=5
+# [Bir IP'nin engellenmesi için gereken maksimum ihlal sayısı]
+## MAX_ATTEMPTS=5
 
-# Engelleme süresi (Saniye cinsinden - Örn: 3600 = 1 saat)
-BAN_TIME=3600
+# [Engelleme süresi (Saniye cinsinden - Örn: 3600 = 1 saat)]
+## BAN_TIME=3600
 
-# "true": Sadece ekrana yazar (Tatbikat modu) | "false": Gerçek firewall ban atar
-DRY_RUN="false"
-🧹 Sistemden Kaldırma (Uninstallation)
+# ["true": Sadece ekrana yazar (Tatbikat modu) | "false": Gerçek firewall ban atar]
+## DRY_RUN="false"
+
+
+## 🧹 Sistemden Kaldırma (Uninstallation)
+````
 Sistemi iz bırakmadan ve firewall kurallarını orijinal haline döndürerek temizlemek için:
-
-Bash
-sudo ./uninstall.sh
+````
+## sudo ./uninstall.sh
